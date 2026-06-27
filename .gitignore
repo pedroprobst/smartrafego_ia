@@ -1,0 +1,51 @@
+# Python
+venv/
+python/venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.ipynb_checkpoints/
+
+# Node / NextJS
+node_modules/
+nextjs/node_modules/
+.next/
+nextjs/.next/
+out/
+nextjs/out/
+build/
+nextjs/build/
+next-env.d.ts
+nextjs/next-env.d.ts
+.tsbuildinfo
+nextjs/*.tsbuildinfo
+
+# Model weights (large files)
+models/*.pt
+*.pt
+
+# Database
+database/*.db
+*.db
+*.db-journal
+
+# Uploads & Processed files
+uploads/*
+!uploads/.gitkeep
+processed/*
+!processed/.gitkeep
+
+# Environment variables
+.env
+.env*
+nextjs/.env*
+
+# Logs & OS Files
+*.log
+npm-debug.log*
+yarn-debug.log*
+.pnpm-debug.log*
+.DS_Store
+Thumbs.db

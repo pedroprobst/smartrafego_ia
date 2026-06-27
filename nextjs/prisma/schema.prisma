@@ -1,0 +1,29 @@
+datasource db {
+  provider = "sqlite"
+  url      = "file:../../database/dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Analysis {
+  id             String    @id @default(uuid())
+  filename       String
+  processedImage String
+  processingTime Float
+  createdAt      DateTime  @default(now())
+  vehicles       Vehicle[]
+}
+
+model Vehicle {
+  id         String   @id @default(uuid())
+  category   String
+  confidence Float
+  x          Float
+  y          Float
+  width      Float
+  height     Float
+  analysisId String
+  analysis   Analysis @relation(fields: [analysisId], references: [id], onDelete: Cascade)
+}
