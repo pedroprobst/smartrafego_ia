@@ -21,7 +21,7 @@
 
 O **SmarTrafego AI** é uma plataforma de monitoramento inteligente de tráfego urbano e telemetria veicular em tempo real. A aplicação simula uma central de operações de transporte inteligente (ITS - *Intelligent Transportation Systems*), permitindo que operadores viários, motoristas e gestores públicos acompanhem o fluxo de veículos, pontos de congestionamento, limites de velocidade e registros de veículos em circulação em vias urbanas e rodovias.
 
-O projeto foi refatorado e construído seguindo à risca as normas acadêmicas que exigem **código puro**, sem o uso de bibliotecas pesadas ou frameworks (como React, Vue ou Angular), executando **100% no navegador (Client-Side)**.
+Originalmente desenvolvido para atender aos requisitos de outra disciplina, o projeto foi reaproveitado e adaptado para as especificidades da programação web. Ele foi refatorado e construído seguindo à risca as normas acadêmicas que exigem **código puro**, sem o uso de bibliotecas pesadas ou frameworks (como React, Vue ou Angular), executando **100% no navegador (Client-Side)**.
 
 ---
 
