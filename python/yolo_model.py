@@ -11,7 +11,7 @@ class YoloDetector:
         if config_path is None:
             config_path = os.path.join(script_dir, "detector_config.json")
             
-        # Default fallback configuration (COCO with yolo11l.pt)
+
         self.config = {
             "model_path": "../models/yolo11l.pt",
             "imgsz": 1536,
@@ -29,7 +29,7 @@ class YoloDetector:
             "use_van_heuristic": True
         }
         
-        # Load from config file if available
+        
         if os.path.exists(config_path):
             try:
                 with open(config_path, "r", encoding="utf-8") as f:
@@ -43,7 +43,6 @@ class YoloDetector:
         else:
             print("[YoloDetector] Configuration file not found, using default coco settings.")
             
-        # Process class mappings: build mapping dictionaries supporting both string and integer keys
         self.class_mappings = {}
         for k, v in self.config["class_mappings"].items():
             self.class_mappings[str(k)] = v
