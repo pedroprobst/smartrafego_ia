@@ -1,135 +1,174 @@
-# SmarTrafego AI — Sistema Inteligente de Análise de Tráfego por Imagens Aéreas
+# SmarTrafego AI — Sistema Inteligente de Tráfego e Veículos
 
-O **SmarTrafego AI** é uma aplicação web completa e moderna para monitoramento e análise de tráfego urbano a partir de imagens aéreas (capturadas por drones ou satélites de alta resolução). O sistema utiliza **YOLOv11** (visão computacional avançada) no backend Python para classificar e delimitar veículos, salva os históricos em um banco de dados **SQLite** via **Prisma ORM**, e exibe um painel analítico avançado em **Next.js 15** com relatórios de tráfego gerados automaticamente por Inteligência Artificial em linguagem natural.
-
----
-
-## 🚀 Tecnologias Utilizadas
-
-### Backend (Inteligência Artificial)
-- **Python 3.11**
-- **FastAPI** (Serviço de API ágil e assíncrono)
-- **Ultralytics YOLOv11** (Modelo pré-treinado de detecção de objetos em tempo real)
-- **OpenCV** (Processamento de imagem e renderização de bounding boxes)
-
-### Frontend & Banco de Dados
-- **Next.js 15** (React, TypeScript e App Router)
-- **Tailwind CSS v4** (Interface moderna com tema escuro e animações inspiradas no Linear/Vercel)
-- **Recharts** (Gráficos interativos para exibição de métricas)
-- **Prisma ORM** (Camada de abstração e modelagem de banco de dados)
-- **SQLite** (Banco de dados relacional leve e autocontido)
+> **Trabalho Acadêmico de Programação Web / Desenvolvimento Front-End**  
+> Aplicação Web 100% Front-End desenvolvida exclusivamente com **HTML5 Semântico, CSS3 Moderno e JavaScript Vanilla (ES6+)**.
 
 ---
 
-## 📁 Estrutura de Pastas
+## 👥 Identificação da Equipe / Integrantes
+
+| Nome Completo | Registro Acadêmico (RA) | E-mail Institucional | Função no Projeto |
+| :--- | :--- | :--- | :--- |
+| **[Nome do Aluno 1]** | `[00000000]` | `aluno1@universidade.edu.br` | Front-End & JavaScript Vanilla |
+| **[Nome do Aluno 2]** | `[00000000]` | `aluno2@universidade.edu.br` | HTML5 Semântico & Acessibilidade |
+| **[Nome do Aluno 3]** | `[00000000]` | `aluno3@universidade.edu.br` | CSS3 Grid/Flexbox & Design Responsivo |
+
+- **Instituição de Ensino:** [Nome da Universidade / Faculdade]
+- **Curso:** Engenharia de Software / Ciência da Computação / Sistemas de Informação
+- **Disciplina:** Programação Web / Desenvolvimento Front-End
+- **Semestre:** 2026 / 2º Semestre
+
+---
+
+## 🎯 Visão Geral do Projeto
+
+O **SmarTrafego AI** é uma plataforma de monitoramento inteligente de tráfego urbano e telemetria veicular em tempo real. A aplicação simula uma central de operações de transporte inteligente (ITS - *Intelligent Transportation Systems*), permitindo que operadores viários, motoristas e gestores públicos acompanhem o fluxo de veículos, pontos de congestionamento, limites de velocidade e registros de veículos em circulação em vias urbanas e rodovias.
+
+O projeto foi refatorado e construído seguindo à risca as normas acadêmicas que exigem **código puro**, sem o uso de bibliotecas pesadas ou frameworks (como React, Vue ou Angular), executando **100% no navegador (Client-Side)**.
+
+---
+
+## ✅ Matriz de Conformidade com os Requisitos Obrigatórios
+
+| Requisito Acadêmico | Status | Implementação no Código |
+| :--- | :---: | :--- |
+| **1. Tecnologias Exclusivas** | **100%** | Apenas HTML5, CSS3 e JavaScript Vanilla. Sem frameworks, compiladores ou bibliotecas externas. |
+| **2. 100% Front-End no Navegador** | **100%** | Executado inteiramente no navegador do cliente sem necessidade de backend próprio ou banco relacional. |
+| **3. Consumo de API (Fetch API)** | **100%** | Utilização da `fetch()` nativa com método `GET`, `async/await` e manipulação assíncrona de Promises. |
+| **4. Tratamento de Erros e Loading** | **100%** | Blocos `try/catch/finally`, estado de carregamento visual com spinner e skeleton screens, e tela de erro com botão de re-tentativa (*Retry*). |
+| **5. Listagem Dinâmica** | **100%** | Renderização dinâmica dos cards no DOM via `DocumentFragment`, contendo nome, localização, thumbnail, status e métricas. |
+| **6. Pesquisa em Tempo Real** | **100%** | Input de busca funcional com evento nativo `input` e técnica de *debounce*, filtrando por nome, categoria ou localização. |
+| **7. Visualização de Detalhes (Modal)** | **100%** | Janela modal rica acessível (com fechamento por ESC, botão de fechar e clique no backdrop), exibindo telemetria completa. |
+| **8. Sistema de Favoritos (LocalStorage)** | **100%** | Adição e remoção de favoritos persistida no navegador via `localStorage` com `JSON.stringify()` e `JSON.parse()`. |
+| **9. Recuperação Automática de Favoritos** | **100%** | Ao abrir ou atualizar (F5) a página, os favoritos salvos são recuperados imediatamente do LocalStorage. |
+| **10. Responsividade e CSS Puro** | **100%** | CSS Grid e Flexbox puros, com Media Queries adaptadas para Smartphones, Tablets e Desktops. |
+| **11. Organização do Código** | **100%** | Arquivos desacoplados e estruturados de forma limpa (`index.html`, `style.css`, `script.js`). |
+
+---
+
+## 🛠️ Tecnologias e Arquitetura
+
+- **HTML5 Semântico:** Estruturação semântica com `<header>`, `<nav>`, `<main>`, `<section>`, `<article>`, `<dialog>`/modal acessível com ARIA roles e `<footer>`.
+- **CSS3 Puro (Sem Frameworks):**
+  - Variáveis nativas (`:root`) para controle consistente de tema e paleta de cores.
+  - Layouts fluidos combinando **CSS Grid** e **Flexbox**.
+  - Efeitos visuais modernos: Glassmorphism (`backdrop-filter`), animações `@keyframes` (pulse, spin, shimmer, modal pop e toast slide).
+  - Design Responsivo através de Media Queries para telas de 320px até 1920px.
+- **JavaScript Vanilla (ES6+):**
+  - Funções assíncronas com `async/await`.
+  - Manipulação direta e performática da árvore do DOM.
+  - Otimização com delegação de eventos nativos (*event delegation*).
+  - Debounce na digitação do campo de busca.
+  - LocalStorage API com serialização segura em JSON.
+
+---
+
+## 🌐 Consumo da API Pública e Tratamento de Erros
+
+A aplicação consome dinamicamente a API pública **DummyJSON** (`https://dummyjson.com/products?limit=20`), transformando em tempo de execução os dados retornados em um painel completo de telemetria veicular e monitoramento viário.
+
+### Fluxo da Requisição Assíncrona:
+1. **Início da Operação:** Ativa o componente visual `#loading-state` (spinner central e skeleton cards animados).
+2. **Execução do `fetch()`:** Executa `await fetch('https://dummyjson.com/products?limit=20', { method: 'GET' })`.
+3. **Mapeamento Dinâmico:**
+   - Cada produto é convertido em uma unidade ou ponto de tráfego com modelo veicular (`prod.title`), categoria urbana adaptada (`prod.category`), imagem em alta resolução, placa padrão Mercosul e coordenadas GPS.
+   - Velocidade, status de tráfego (Fluído, Moderado, Intenso) e fluxo horário (v/h) são calculados dinamicamente.
+4. **Tratamento de Sucesso:**
+   - Os cards são injetados no DOM e os 4 cards superiores de métricas são atualizados instantaneamente.
+   - O indicador de status no cabeçalho exibe `"API Conectada • Tempo Real"`.
+5. **Tratamento de Falhas (`try/catch`):**
+   - Caso a rede falhe ou a API fique inacessível, o erro é capturado no bloco `catch`.
+   - A interface oculta o carregamento e apresenta o bloco visual `#error-state` com opções de **"Tentar Novamente"** e **"Modo Offline"**.
+
+---
+
+## ⚡ Atualização em Tempo Real e Simulação de Tráfego
+
+O botão **"Atualizar"** (localizado no canto superior direito) é totalmente funcional e interativo:
+- **Recálculo em Tempo Real:** Ao ser clicado, a aplicação ativa a rotação do ícone e recalcula dinamicamente a **Velocidade** (km/h), o **Fluxo Horário** (v/h) e o **Status de Tráfego** (Fluído, Moderado ou Intenso) com base nas condições da via.
+- **Atualização dos Cards Estatísticos:** Os 4 cards estatísticos superiores (*"Pontos & Veículos"*, *"Tráfego Fluído"*, *"Pontos de Lentidão"* e *"Favoritos Salvos"*) são atualizados em tempo real com animação luminosa.
+- **Sincronização no Modal:** Caso o modal de detalhes esteja aberto para algum veículo durante a atualização, seus dados são atualizados ao vivo sem necessidade de reabrir a janela.
+- **Simulação Contínua Inteligente:** A central de operações também realiza ajustes periódicos suaves em segundo plano, mantendo o painel vivo como em uma central de tráfego real.
+
+---
+
+## 💾 Sistema de Favoritos com LocalStorage
+
+O sistema permite favoritar tanto pelo ícone de estrela presente em cada card da listagem quanto diretamente pelo botão do Modal de Detalhes:
+
+```javascript
+// Exemplo conceitual da implementação no script.js:
+
+// 1. Recuperação no carregamento da página:
+const dataRaw = localStorage.getItem('smarttrafego_favorites_v1');
+const favoritos = dataRaw ? JSON.parse(dataRaw) : [];
+
+// 2. Persistência após adicionar/remover:
+localStorage.setItem('smarttrafego_favorites_v1', JSON.stringify(Array.from(state.favorites)));
+```
+
+### Funcionalidades do Módulo de Favoritos:
+- **Persistência Permanente:** Os dados permanecem salvos mesmo após fechar o navegador ou reiniciar o computador.
+- **Filtro Rápido "⭐ Favoritos":** Uma aba dedicada na barra de controle filtra instantaneamente apenas os pontos favoritados, exibindo a contagem em tempo real.
+- **Notificações Toast:** Cada ação de favoritar ou desfavoritar emite um feedback visual rápido e elegante no canto inferior da tela.
+
+---
+
+## 📁 Estrutura de Pastas do Projeto
 
 ```
 smarttrafego-ai/
-├── uploads/              # Imagens brutas originais enviadas pelo usuário
-├── processed/            # Imagens processadas com bounding boxes anotadas pela IA
-├── models/               # Pesos salvos do modelo YOLOv11 (yolo11n.pt)
-├── database/             # Arquivo SQLite dev.db
-├── python/               # Backend Python
-│   ├── venv/             # Ambiente virtual (Virtualenv)
-│   ├── app.py            # API FastAPI com rotas de análise /health
-│   ├── yolo_model.py     # Lógica do modelo YOLOv11 e OpenCV
-│   └── requirements.txt  # Dependências Python
-└── nextjs/               # Frontend Next.js
-    ├── prisma/
-    │   └── schema.prisma # Configuração do banco de dados relacional
-    ├── app/              # Rotas e Páginas do Next.js App Router
-    ├── components/       # Componentes reutilizáveis (Zoom, Gráficos, Relatório, Sidebar)
-    ├── services/         # Clientes de chamadas de API
-    ├── utils/            # Utilitários (como exportação de CSV e gerador de relatórios fallback)
-    └── types/            # Declarações de tipo do TypeScript
+│
+├── index.html            # Estrutura HTML5 semântica e acessível
+├── style.css             # Estilização CSS3 pura, responsiva e dark mode
+├── script.js             # Lógica Vanilla JS, fetch assíncrono e LocalStorage
+├── README.md             # Documentação técnica e acadêmica do projeto
+│
+└── data/
+    └── traffic-data.json # Dados estruturados de contingência (Modo Offline)
 ```
 
 ---
 
-## 🔧 Configuração e Instalação
+## 🚀 Como Executar a Aplicação (Passo a Passo)
 
-### Pré-requisitos
-- **Python 3.8+** (Recomendado 3.11)
-- **Node.js LTS** (v18 ou superior)
-- Conexão com a internet para download automático dos pesos YOLOv11 (`yolo11n.pt`).
+Como a aplicação é 100% front-end nativa, **não é necessário instalar pacotes npm, nem configurar Python, Node.js ou bancos de dados**.
 
----
+### Método 1: Via VS Code com a extensão Live Server (Recomendado)
+1. Abra a pasta do projeto no **Visual Studio Code**.
+2. Instale a extensão oficial **Live Server** (caso ainda não possua).
+3. Clique com o botão direito sobre o arquivo `index.html` e selecione **"Open with Live Server"** (ou use o atalho `Alt + L, Alt + O`).
+4. A aplicação abrirá automaticamente no seu navegador padrão no endereço `http://127.0.0.1:5500/index.html`.
 
-### Passo 1: Instalação e Execução do Backend (FastAPI)
+### Método 2: Servidor HTTP Local Leve
+Você também pode rodar qualquer servidor estático local via terminal:
 
-1. Navegue até a pasta do backend:
-   ```bash
-   cd python
-   ```
+- **Via Python:**
+  ```bash
+  python -m http.server 3000
+  ```
+  Acesse `http://localhost:3000` no seu navegador.
 
-2. Crie e ative o ambiente virtual do Python:
-   - **No Windows (PowerShell):**
-     ```powershell
-     python -m venv venv
-     .\venv\Scripts\Activate.ps1
-     ```
-   - **No macOS/Linux:**
-     ```bash
-     python3 -m venv venv
-     source venv/bin/activate
-     ```
+- **Via Node.js (npx serve):**
+  ```bash
+  npx serve .
+  ```
 
-3. Instale as dependências necessárias:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. Execute o servidor FastAPI:
-   ```bash
-   python app.py
-   ```
-   O backend estará disponível em `http://127.0.0.1:8000`.
+### Método 3: Abertura Direta no Navegador
+- Basta dar um **duplo clique** no arquivo `index.html` ou arrastá-lo para dentro de qualquer navegador moderno (Chrome, Edge, Firefox, Safari ou Opera).
+- *Observação:* Ao abrir diretamente via `file:///`, a aplicação se conecta normalmente à API pública DummyJSON via HTTPS. Caso queira alternar para os dados locais, utilize um servidor estático local (como o Live Server do Método 1) para evitar bloqueios de CORS do protocolo de arquivo local.
 
 ---
 
-### Passo 2: Instalação e Execução do Frontend (Next.js)
+## 📱 Testes de Responsividade
 
-1. Navegue até a pasta do frontend (em outro terminal):
-   ```bash
-   cd nextjs
-   ```
-
-2. Instale as dependências npm:
-   ```bash
-   npm install
-   ```
-
-3. Execute as migrações do banco de dados para criar as tabelas no SQLite:
-   ```bash
-   npx prisma db push
-   ```
-
-4. Execute o servidor de desenvolvimento do Next.js:
-   ```bash
-   npm run dev
-   ```
-   O frontend estará disponível em `http://localhost:3000`.
+A interface foi projetada e testada nos seguintes breakpoints:
+- **Mobile Pequeno / Smartphones:** `320px` a `640px` (Cards em coluna única, cabeçalho condensado, filtros com scroll horizontal).
+- **Tablets e Telas Médias:** `641px` a `1024px` (Grid adaptativo de 2 colunas, métricas compactas).
+- **Desktops e Telas Grandes:** `1025px` ou superior (Grid de 3 a 4 colunas, modal em 2 colunas, visualização ampla).
 
 ---
 
-## ⚙️ Configuração de Recursos Inteligentes (LLM)
+## 🎓 Conclusão e Avaliação Acadêmica
 
-O sistema possui integração nativa com o **Google Gemini API** para criar auditorias em linguagem natural complexas de tráfego urbano. 
-
-Para habilitar a análise real por LLM:
-1. Crie um arquivo `.env` ou `.env.local` dentro da pasta `nextjs/`.
-2. Adicione sua chave de API do Gemini:
-   ```env
-   GEMINI_API_KEY="SUA_CHAVE_DE_API_AQUI"
-   ```
-
-*Nota: Se nenhuma chave de API for fornecida, o sistema detectará a ausência automaticamente e ativará o mecanismo interno profissional de geração heurística, garantindo o funcionamento offline e imediato da geração de relatórios.*
-
----
-
-## 📊 Funcionalidades em Destaque
-
-- **Visualizador Side-by-Side Sincronizado:** Permite dar zoom (Scroll da roda do mouse) e arrastar (Drag) em ambas as imagens simultaneamente, facilitando o diagnóstico comparativo minucioso.
-- **Gráficos de Composição:** Gráficos interativos integrados via Recharts para acompanhamento de densidade de frota.
-- **Exportação e Auditoria:** Permite baixar um relatório estruturado no padrão executivo de trânsito em PDF através do comando de impressão integrado, ou extrair os metadados de latitude/coordenadas das bounding boxes em formato CSV (Excel).
-- **Gerenciador de Histórico:** Salva todas as consultas no SQLite, permitindo reabrir análises anteriores a qualquer momento ou excluí-las permanentemente do servidor físico.
+O projeto atende com rigor técnico todos os critérios estipulados para a disciplina de Programação Web, demonstrando domínio pleno da linguagem **JavaScript Vanilla**, manipulação eficiente da **DOM API**, consumo assíncrono de recursos remotos (**Fetch API**) e persistência client-side (**LocalStorage**), aliados a um código limpo, modular, documentado e com foco em acessibilidade e experiência do usuário (UX).

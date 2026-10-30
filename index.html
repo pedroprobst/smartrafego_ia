@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="SmarTrafego AI - Sistema Inteligente de Monitoramento e Gestão de Tráfego de Veículos. Aplicação 100% Front-End em JavaScript Vanilla, HTML5 Semântico e CSS3." />
+  <title>SmarTrafego AI — Monitoramento e Gestão de Veículos</title>
+  
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ==================== CABEÇALHO PRINCIPAL ==================== -->
+  <header class="main-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-logo" aria-hidden="true">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14 16H9m10 0h3v-3.15a1 1 0 0 0-.84-.99L16 11l-2.7-3.6a1 1 0 0 0-.8-.4H7.5a1 1 0 0 0-.8.4L4 11l-5.16.86a1 1 0 0 0-.84.99V16h3" />
+            <circle cx="6.5" cy="16.5" r="2.5" />
+            <circle cx="16.5" cy="16.5" r="2.5" />
+          </svg>
+        </div>
+        <div class="brand-text">
+          <h1 class="brand-title">SmarTrafego <span>AI</span></h1>
+          <p class="brand-subtitle">Monitoramento Inteligente de Veículos e Vias Urbanas</p>
+        </div>
+      </div>
+
+      <div class="header-badges">
+        <div class="live-pill" title="Status da sincronização de dados">
+          <span class="pulse-dot"></span>
+          <span id="api-status-text">Sincronizando API...</span>
+        </div>
+        <button id="refresh-btn" class="btn-refresh" title="Atualizar dados da API" aria-label="Atualizar dados">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 4 23 10 17 10"></polyline>
+            <polyline points="1 20 1 14 7 14"></polyline>
+            <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+          </svg>
+          <span>Atualizar</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== DASHBOARD / MÉTRICAS RÁPIDAS ==================== -->
+  <section class="metrics-bar" aria-label="Métricas gerais de tráfego">
+    <div class="metrics-container">
+      <div class="metric-card">
+        <div class="metric-icon metric-icon-blue" aria-hidden="true">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <div class="metric-info">
+          <span class="metric-label">Pontos & Veículos</span>
+          <strong id="metric-total-items" class="metric-value">0</strong>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon metric-icon-green" aria-hidden="true">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+          </svg>
+        </div>
+        <div class="metric-info">
+          <span class="metric-label">Tráfego Fluído</span>
+          <strong id="metric-fluid" class="metric-value">0</strong>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon metric-icon-red" aria-hidden="true">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <div class="metric-info">
+          <span class="metric-label">Pontos de Lentidão</span>
+          <strong id="metric-heavy" class="metric-value">0</strong>
+        </div>
+      </div>
+
+      <div class="metric-card">
+        <div class="metric-icon metric-icon-gold" aria-hidden="true">
+          <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+          </svg>
+        </div>
+        <div class="metric-info">
+          <span class="metric-label">Favoritos Salvos</span>
+          <strong id="metric-favorites" class="metric-value">0</strong>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== ÁREA PRINCIPAL ==================== -->
+  <main class="main-content">
+    
+    <!-- BARRA DE CONTROLE: BUSCA, FILTROS E ORDENAÇÃO -->
+    <section class="controls-panel" aria-label="Filtros e pesquisa">
+      <!-- Campo de Pesquisa em Tempo Real -->
+      <div class="search-box">
+        <label for="search-input" class="sr-only">Pesquisar por nome, veículo ou localização</label>
+        <div class="search-input-wrapper">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="text" 
+            id="search-input" 
+            placeholder="Pesquisar por nome, categoria ou localização..." 
+            autocomplete="off"
+          />
+          <button id="clear-search-btn" class="clear-search-btn hidden" aria-label="Limpar pesquisa" title="Limpar pesquisa">
+            &times;
+          </button>
+        </div>
+      </div>
+
+      <!-- Filtros de Categoria e Favoritos -->
+      <nav class="filters-nav" aria-label="Filtrar por status">
+        <button class="filter-chip active" data-filter="all">Todos (<span id="count-all">0</span>)</button>
+        <button class="filter-chip" data-filter="favorites">
+          <span class="star-icon">★</span> Favoritos (<span id="count-fav">0</span>)
+        </button>
+        <button class="filter-chip chip-fluid" data-filter="Fluído">Fluído</button>
+        <button class="filter-chip chip-moderate" data-filter="Moderado">Moderado</button>
+        <button class="filter-chip chip-heavy" data-filter="Intenso">Intenso</button>
+      </nav>
+
+      <!-- Seletor de Ordenação -->
+      <div class="sort-wrapper">
+        <label for="sort-select" class="sort-label">Ordenar:</label>
+        <select id="sort-select" class="sort-select">
+          <option value="default">Padrão</option>
+          <option value="name-asc">Nome (A - Z)</option>
+          <option value="name-desc">Nome (Z - A)</option>
+          <option value="speed-desc">Maior Velocidade</option>
+          <option value="flow-desc">Maior Fluxo de Tráfego</option>
+        </select>
+      </div>
+    </section>
+
+    <!-- ESTADO VISUAL DE CARREGAMENTO (LOADING SKELETON) -->
+    <div id="loading-state" class="state-container" aria-live="polite">
+      <div class="spinner-wrapper">
+        <div class="spinner"></div>
+        <p class="loading-message">Conectando à API pública e carregando dados de tráfego...</p>
+        <span class="loading-sub">Aguarde, processando requisições com async/await</span>
+      </div>
+
+      <!-- Skeleton cards para sensação de carregamento moderna -->
+      <div class="skeleton-grid" aria-hidden="true">
+        <div class="skeleton-card">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line long"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line long"></div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton-thumb"></div>
+          <div class="skeleton-line short"></div>
+          <div class="skeleton-line medium"></div>
+          <div class="skeleton-line long"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTADO DE ERRO VISUAL (TRY/CATCH ROBUSTO) -->
+    <div id="error-state" class="state-container hidden" role="alert">
+      <div class="error-box">
+        <div class="error-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="10"></circle>
+            <line x1="12" y1="8" x2="12" y2="12"></line>
+            <line x1="12" y1="16" x2="12.01" y2="16"></line>
+          </svg>
+        </div>
+        <h3 class="error-title">Falha de Comunicação com a API</h3>
+        <p id="error-message" class="error-description">Não foi possível buscar os dados do tráfego. Verifique sua conexão de rede.</p>
+        <div class="error-actions">
+          <button id="retry-btn" class="btn-primary">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polyline points="23 4 23 10 17 10"></polyline>
+              <polyline points="1 20 1 14 7 14"></polyline>
+              <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+            </svg>
+            Tentar Novamente
+          </button>
+          <button id="fallback-data-btn" class="btn-secondary">
+            Carregar Dados Locais (Modo Offline)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ESTADO VAZIO (NENHUM ITEM ENCONTRADO) -->
+    <div id="empty-state" class="state-container hidden">
+      <div class="empty-box">
+        <div class="empty-icon" aria-hidden="true">🔍</div>
+        <h3 class="empty-title">Nenhum resultado encontrado</h3>
+        <p id="empty-description" class="empty-text">Tente alterar os termos de pesquisa ou remover os filtros aplicados.</p>
+        <button id="reset-filters-btn" class="btn-secondary">Limpar Filtros e Busca</button>
+      </div>
+    </div>
+
+    <!-- CONTAINER DA LISTAGEM DINÂMICA DE CARDS -->
+    <section id="cards-section" class="cards-section" aria-label="Lista de veículos e pontos de tráfego">
+      <div id="cards-grid" class="cards-grid">
+        <!-- Injetado dinamicamente via JavaScript -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== MODAL DE DETALHES ==================== -->
+  <div id="details-modal" class="modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-card">
+      <header class="modal-header">
+        <div class="modal-header-info">
+          <span id="modal-category" class="badge-category">Categoria</span>
+          <h2 id="modal-title" class="modal-title">Nome do Ponto de Tráfego</h2>
+        </div>
+        <button id="close-modal-btn" class="modal-close-btn" aria-label="Fechar janela de detalhes">&times;</button>
+      </header>
+
+      <div class="modal-body">
+        <div class="modal-image-wrapper">
+          <img id="modal-image" src="" alt="Imagem do veículo ou ponto de tráfego" class="modal-image" />
+          <div id="modal-status-badge" class="badge-status">Status</div>
+        </div>
+
+        <div class="modal-details-content">
+          <p class="modal-location">
+            <svg class="icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span id="modal-location-text">Localização</span>
+          </p>
+
+          <p id="modal-description" class="modal-description">Descrição detalhada do tráfego...</p>
+
+          <!-- Grid de Métricas no Modal -->
+          <div class="modal-metrics-grid">
+            <div class="modal-metric-item">
+              <span class="label">Velocidade Registrada</span>
+              <strong id="modal-speed" class="value">0 km/h</strong>
+            </div>
+            <div class="modal-metric-item">
+              <span class="label">Limite da Via</span>
+              <strong id="modal-speed-limit" class="value">0 km/h</strong>
+            </div>
+            <div class="modal-metric-item">
+              <span class="label">Fluxo Veicular</span>
+              <strong id="modal-flow" class="value">0 veíc/h</strong>
+            </div>
+            <div class="modal-metric-item">
+              <span class="label">Precisão do Sensor</span>
+              <strong id="modal-confidence" class="value">0%</strong>
+            </div>
+          </div>
+
+          <div class="modal-extra-info">
+            <div class="extra-row">
+              <span class="extra-key">Identificação / Placa:</span>
+              <span id="modal-plate" class="extra-value">BRA-0000</span>
+            </div>
+            <div class="extra-row">
+              <span class="extra-key">Coordenadas:</span>
+              <span id="modal-coords" class="extra-value">-23.5505, -46.6333</span>
+            </div>
+            <div class="extra-row">
+              <span class="extra-key">Última Telemetria:</span>
+              <span id="modal-update" class="extra-value">Agora</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer class="modal-footer">
+        <button id="modal-fav-btn" class="btn-modal-fav">
+          <span class="fav-icon">★</span>
+          <span class="fav-text">Adicionar aos Favoritos</span>
+        </button>
+        <button id="modal-close-action" class="btn-secondary">Fechar</button>
+      </footer>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST DE NOTIFICAÇÃO NATIVO ==================== -->
+  <div id="toast" class="toast hidden" role="status" aria-live="polite">
+    <span id="toast-message">Notificação</span>
+  </div>
+
+  <!-- ==================== RODAPÉ ACADÊMICO ==================== -->
+  <footer class="main-footer">
+    <div class="footer-container">
+      <div class="footer-col">
+        <p class="footer-brand"><strong>SmarTrafego AI</strong> — Sistema de Tráfego de Veículos</p>
+        <p class="footer-text">Trabalho Acadêmico de Programação Web — Desenvolvimento Front-End Vanilla.</p>
+      </div>
+      <div class="footer-col footer-tech">
+        <span class="tech-tag">HTML5 Semântico</span>
+        <span class="tech-tag">CSS3 (Grid/Flex)</span>
+        <span class="tech-tag">JavaScript Vanilla ES6+</span>
+        <span class="tech-tag">Fetch API (GET)</span>
+        <span class="tech-tag">LocalStorage</span>
+      </div>
+      <div class="footer-col footer-copy">
+        <p>&copy; 2026 SmarTrafego AI. 100% Client-Side no Navegador.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script da aplicação (Vanilla JS sem bibliotecas externas) -->
+  <script src="script.js"></script>
+</body>
+</html>
+

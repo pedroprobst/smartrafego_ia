@@ -1,8 +1,11 @@
 import os
 import shutil
 import uuid
+# pyrefly: ignore [missing-import]
 from fastapi import FastAPI, UploadFile, File, HTTPException
+# pyrefly: ignore [missing-import]
 from fastapi.middleware.cors import CORSMiddleware
+# pyrefly: ignore [missing-import]
 from pydantic import BaseModel
 from typing import List
 from yolo_model import YoloDetector
@@ -88,5 +91,6 @@ async def analyze(file: UploadFile = File(...)):
     }
 
 if __name__ == "__main__":
+    # pyrefly: ignore [missing-import]
     import uvicorn
     uvicorn.run("app:app", host="127.0.0.1", port=8000, reload=True)
