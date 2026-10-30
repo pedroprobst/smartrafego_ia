@@ -7,16 +7,13 @@
 
 ## 👥 Identificação da Equipe / Integrantes
 
-| Nome Completo | Registro Acadêmico (RA) | E-mail Institucional | Função no Projeto |
-| :--- | :--- | :--- | :--- |
-| **[Nome do Aluno 1]** | `[00000000]` | `aluno1@universidade.edu.br` | Front-End & JavaScript Vanilla |
-| **[Nome do Aluno 2]** | `[00000000]` | `aluno2@universidade.edu.br` | HTML5 Semântico & Acessibilidade |
-| **[Nome do Aluno 3]** | `[00000000]` | `aluno3@universidade.edu.br` | CSS3 Grid/Flexbox & Design Responsivo |
+| Nome Completo |
+| **[Nome do Aluno 1]** | Pedro Daniel Godinho Probst.
 
-- **Instituição de Ensino:** [Nome da Universidade / Faculdade]
-- **Curso:** Engenharia de Software / Ciência da Computação / Sistemas de Informação
-- **Disciplina:** Programação Web / Desenvolvimento Front-End
-- **Semestre:** 2026 / 2º Semestre
+- **Instituição de Ensino:** Universidade Federal do Oeste do Pará 
+- **Curso:** Sistemas de Informação
+- **Disciplina:** Programação Web 
+- **Semestre:** 2026.2
 
 ---
 
